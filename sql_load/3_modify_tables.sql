@@ -1,35 +1,39 @@
+/* ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
+Database Load Issues (follow if receiving permission denied when running SQL code below)
+
+NOTE: If you are having issues with permissions. And you get error: "could not open file
+"[your file path]\job_postings_fact.csv" for reading: Permission denied."
+
+1. Open pgAdmin
+2. In Object Explorer (left-hand pane), navigate to `sql_course` database
+3. Right-click `sql_course` and select `PSQL Tool`
+    - This opens a terminal window to write the following code
+4. Get the absolute file path of your csv files
+    1. Find path by right-clicking a CSV file in VS Code and selecting “Copy Path”
+5. Paste the following into `PSQL Tool`, (with the CORRECT file path)
+
+\copy company_dim FROM '[insert file path]/csv_files/company_dim.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',');
+
+\copy skills_dim FROM '[insert file path]/csv_files/skills_dim.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',');
+
+\copy job_postings_fact FROM '[insert file path]/csv_files/job_postings_fact.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',');
+
+\copy skills_job_dim FROM '[insert file path]/csv_files/skills_job_dim.csv' WITH (FORMAT csv, HEADER true, DELIMITER ',');
+
+*/
+
 COPY company_dim
-FROM 'C:\Program Files\PostgreSQL\16\data\Datasets\sql_course\company_dim.csv'
-DELIMITER ',' CSV HEADER;
-
-COPY job_postings_fact
-FROM 'C:\Program Files\PostgreSQL\16\data\Datasets\sql_course\company_dim.csv'
-DELIMITER ',' CSV HEADER;
-
-COPY skills_job_dim
-FROM 'C:\Program Files\PostgreSQL\16\data\Datasets\sql_course\company_dim.csv'
+FROM '[insert file path]/csv_files/company_dim.csv'
 DELIMITER ',' CSV HEADER;
 
 COPY skills_dim
-FROM 'C:\Program Files\PostgreSQL\16\data\Datasets\sql_course\company_dim.csv'
+FROM '[insert file path]/csv_files/skills_dim.csv'
 DELIMITER ',' CSV HEADER;
 
-/* ⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️
-Database Load Issues for Window Users (follow if receiving permission denied)
+COPY job_postings_fact
+FROM '[insert file path]/csv_files/job_postings_fact.csv'
+DELIMITER ',' CSV HEADER;
 
-NOTE: If you are having issues with permissions. And you get an error like: "could not open file
-"C:\file_path\job_postings_fact.csv" for reading: Permission denied."
-
-1. Go to your program files where you have installed postgreSQL
-a. Program Files → PostgreSQL → 16 → Data
-
-2. Now you're inside the data folder. Create a new folder called 'Datasets'.
-
-3. Inside the Datasets folder create new folders for your different projects. For this project we'll create a new folder named 'sql_course'
-
-4. Move your CSV files ( company_dim, job_postings_fact, skills_job_dim, skills_dim) into this new folder ( 'sql_course' ).
-
-5. In the code editor ensure your code in this file is updated for the correct file path (e.g., 'C: \Program Files\PostgreSQL\16\data\Datasets\sql_course\company_dim.csv')
-
-6. Run this SQL file.
-*/
+COPY skills_job_dim
+FROM '[insert file path]/csv_files/skills_job_dim.csv'
+DELIMITER ',' CSV HEADER;
